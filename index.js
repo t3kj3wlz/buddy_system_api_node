@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 8854;
 
-const buddyServer = require('./src/buddy_server_module');
+const buddyServer = require('../buddy_server_module');
 
 /*Config*/
 app.use(bodyParser.urlencoded({extended:false}));
@@ -33,13 +33,17 @@ app.post('/strain',buddyServer.createStrain);
 
 /*Transfers*/
 
-app.get('/transfer',buddyServer.returnAllTransfers);
-app.get('/transfer/:id',buddyServer.returnTransfer);
+app.get('/xfer',buddyServer.returnAllTransfers);
+app.get('/xfer/:id',buddyServer.returnTransfer);
+app.post('/xfer',buddyServer.initiateXfer);
+app.put('/xfer/:id',buddyServer.completeXfer);
 
 /*Orders*/
 
 app.get('/order',buddyServer.returnAllOrders);
 app.get('/order/:id',buddyServer.returnOrder);
+app.post('/order',buddyServer.initiateOrder);
+app.put('/order/:id',buddyServer.completeOrder);
 
 /*Vendors*/
 
