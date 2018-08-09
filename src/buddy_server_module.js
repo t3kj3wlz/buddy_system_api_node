@@ -1,6 +1,6 @@
 var buddyServer = (function(){
     const http = require('http');
-    const database = require('./db');
+    const database = require('../db');
     const Transaction = require('./transaction');
     const Strain = require('./strain');
     const BtcXfer = require('./transfer');
@@ -11,11 +11,7 @@ var buddyServer = (function(){
     const Stash = require('./stash');
     const ACCOUNTS = 'outlawdesigns.ddns.net';
     const ACCOUNTPORT = 9661;
-    const DBHOST = 'localhost';
-    const DBUSER = 'root';
-    const DBPASS = '';
-    const DBDB = 'buddy_test';
-    var db = new database(DBHOST,DBUSER,DBPASS,DBDB);
+    var db = new database('localhost','root','','buddy_test');
     function httpRequest(host,method,endpoint,params){
         return new Promise(function(resolve, reject){
             var options = {
@@ -515,6 +511,66 @@ var buddyServer = (function(){
                 res.send(err);
             }
         },
+        initiateXfer:function(req,res,next){
+            try{
+                _verifyToken(req.headers.auth_token).then((user)=>{
+                    BtcXfer.initiate(req.body.stash_used,req.body.initial_rate,user.username).then((stash)=>{
+                        res.send(stash);
+                    },(err)=>{
+                        res.send(err);
+                    });
+                },(err)=>{
+                    res.send(err);
+                });
+            }catch(err){
+                res.send(err);
+            }
+        },
+        completeXfer:function(req,res,next){
+            try{
+                _verifyToken(req.headers.auth_token).then((user)=>{
+                    BtcXfer.complete(req.body.UID,req.body.btc_gained,req.body.completion_rate).then((xfer)=>{
+                        res.send(xfer);
+                    },(err)=>{
+                        res.send(err);
+                    });
+                },(err)=>{
+                    res.send(err);
+                });
+            }catch(err){
+                res.send(err);
+            }
+        },
+        initiateOrder:function(req,res,next){
+            try{
+                _verifyToken(req.headers.auth_token).then((user)=>{
+                    BtcOrder.initiate(req.body.vendor,req.body.strain,req.body.product_amount,req.body.btc_amount,req.body.usd_amount,req.body.btc_fees,req.body.shipping_amount_btc,req.body.shipping_amount_usd,req.body.usd_total_amount,user.username).then((orderObj)=>{
+                        res.send(orderObj._buildPublicObj());
+                    },(err)=>{
+                        res.send(err);
+                    });
+                },(err)=>{
+                    res.send(err);
+                });
+            }catch(err){
+                res.send(err);
+            }
+        },
+        completeOrder:function(req,res,next){
+            try{
+                _verifyToken(req.headers.auth_token).then((user)=>{
+                    BtcOrder.complete(req.params.id).then((orderObj)=>{
+                    res.send(orderObj._buildPublicObj());
+                    },(err)=>{
+                        res.send(err);
+                    });
+                },(err)=>{
+                    res.send(err);
+                });
+            }catch(err){
+                res.send(err);
+            }
+        }
     }
 }());
 
