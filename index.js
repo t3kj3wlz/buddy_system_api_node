@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 8854;
 
-const buddyServer = require('../buddy_server_module');
+const buddyServer = require('./src/buddy_server_module');
 
 /*Config*/
 app.use(bodyParser.urlencoded({extended:false}));
