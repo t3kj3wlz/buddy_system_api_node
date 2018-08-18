@@ -52,7 +52,7 @@ var buddyServer = (function(){
         return new Promise((resolve,reject)=>{
             httpRequest(ACCOUNTS,'GET','verify',params).then((data)=>{
                 if(data.error){
-                    reject(data.error);
+                    reject(data);
                 }
                 resolve(data);
             },(err)=>{
