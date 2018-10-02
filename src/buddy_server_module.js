@@ -69,7 +69,7 @@ var buddyServer = (function(){
             };
             httpRequest(ACCOUNTS,'GET','authenticate',params).then((data)=>{
                 if(data.error){
-                    res.send(data.error);
+                    res.send(data);
                     return;
                 }
                 res.send(data);
