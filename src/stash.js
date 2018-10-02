@@ -25,7 +25,7 @@ class Stash extends Record{
         });
     }
     static getCurrent(type,username){
-        const database = require('../db');
+        const database = require('./db');
         let db = new database('localhost','root','','buddy_test');
         let stashObj = Stash.createStash(type);
         return new Promise((resolve,reject)=>{
