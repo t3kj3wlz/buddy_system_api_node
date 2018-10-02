@@ -1,3 +1,4 @@
+//todo add check for required headers on authenticate.
 var buddyServer = (function(){
     const http = require('http');
     const database = require('./db');
