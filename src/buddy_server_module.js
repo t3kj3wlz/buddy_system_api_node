@@ -1,6 +1,6 @@
 var buddyServer = (function(){
     const http = require('http');
-    const database = require('../db');
+    const database = require('./db');
     const Transaction = require('./transaction');
     const Strain = require('./strain');
     const BtcXfer = require('./transfer');
