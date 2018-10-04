@@ -78,7 +78,11 @@ class Db{
                 if(err){
                     return reject(err);
                 }else{
-                    resolve(rows);
+                    this.close().then(()=>{
+                        resolve(rows);
+                    },(err)=>{
+                        reject(err);
+                    });
                 }
             })
         });
@@ -89,7 +93,6 @@ class Db{
                 if(err){
                     return reject(err);
                 }
-                console.log('Connection Closed.');
                 resolve();
             });
         });
