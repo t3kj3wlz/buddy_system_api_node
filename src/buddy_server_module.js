@@ -470,7 +470,7 @@ var buddyServer = (function(){
         makeSale:function(req,res,next){
             try{
                 _verifyToken(req.headers.auth_token).then((user)=>{
-                    Transaction.makeSale(req.body.buyer,req.body.strain,req.body.amount,req.body.payment,user.username,req.body.front,req.body.discrepency).then((transactionObj)=>{
+                    Transaction.makeSale(req.body.buyer,req.body.strain,req.body.product_amount,req.body.payment,user.username,req.body.front,req.body.discrepency).then((transactionObj)=>{
                         res.send(transactionObj._buildPublicObj());
                     },(err)=>{
                         res.send(err);
