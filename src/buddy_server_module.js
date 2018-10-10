@@ -47,7 +47,7 @@ var buddyServer = (function(){
     }
     function _verifyToken(token){
         if(token === undefined){
-            throw 'Token not present';
+            throw {error:'Token not present'};
         }
         var params = {auth_token:token};
         return new Promise((resolve,reject)=>{
