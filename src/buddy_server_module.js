@@ -485,7 +485,7 @@ var buddyServer = (function(){
         acceptTip:function(req,res,next){
             try{
                 _verifyToken(req.headers.auth_token).then((user)=>{
-                    Transaction.acceptTip(req.body.product_amount,req.body.buyer,user.username).then((stashObj)=>{
+                    Transaction.acceptTip(req.body.payment,req.body.buyer,user.username).then((stashObj)=>{
                         res.send(stashObj._buildPublicObj());
                     },(err)=>{
                         res.send(err);
