@@ -78,6 +78,7 @@ class Transaction extends Record{
                 if(buyerId === 0){
                     transaction.buyer = 'Me';
                     transaction._create().then((newTransaction)=>{resolve(newTransaction);},(err)=>{reject(err);});
+                    return;
                 }else if(buyerId < 0){
                     vendorFlag = true;
                     buyerObj = new Vendor(Math.abs(buyerId));
