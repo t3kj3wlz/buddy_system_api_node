@@ -74,7 +74,7 @@ class Transaction extends Record{
                     reject(err);
                 });
             }else{
-                transaction.strain = null;
+                transaction.strain = 'N/A';
                 if(buyerId === 0){
                     transaction.buyer = 'Me';
                     transaction._create().then((newTransaction)=>{resolve(newTransaction);},(err)=>{reject(err);});
