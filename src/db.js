@@ -74,6 +74,7 @@ class Db{
     }
     execute(){
         return new Promise((resolve,reject)=>{
+            this.con = mysql.createConnection({host:this.host,user:this.user,password:this.password});
             this.con.query(this.query,(err,rows)=>{
                 if(err){
                     return reject(err);
