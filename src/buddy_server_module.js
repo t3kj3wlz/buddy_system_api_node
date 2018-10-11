@@ -485,7 +485,7 @@ var buddyServer = (function(){
         acceptTip:function(req,res,next){
             try{
                 _verifyToken(req.headers.auth_token).then((user)=>{
-                    Transaction.acceptTip(req.body.amount,req.body.buyer,user.username).then((stashObj)=>{
+                    Transaction.acceptTip(req.body.product_amount,req.body.buyer,user.username).then((stashObj)=>{
                         res.send(stashObj._buildPublicObj());
                     },(err)=>{
                         res.send(err);
@@ -500,7 +500,7 @@ var buddyServer = (function(){
         makePurchase:function(req,res,next){
             try{
                 _verifyToken(req.headers.auth_token).then((user)=>{
-                    Transaction.makePurchase(req.body.vendor,req.body.strain,req.body.amount,req.body.payment,user.username,req.body.front).then((transactionObj)=>{
+                    Transaction.makePurchase(req.body.vendor,req.body.strain,req.body.product_amount,req.body.payment,user.username,req.body.front).then((transactionObj)=>{
                         res.send(transactionObj._buildPublicObj());
                     },(err)=>{
                         res.send(err);
