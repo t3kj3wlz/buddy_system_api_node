@@ -41,7 +41,8 @@ class Transaction extends Record{
             transaction.product_amount = amount;
             transaction.payment = payment;
             transaction.user = username;
-            transaction.discrepency = discrepency;
+            transaction.front = front ? 1 : 0;
+            transaction.discrepency = discrepency ? 1 : 0;
             transaction.legacy = 0;
             if(approvedTypes.indexOf(type) === -1){
                 throw 'Invalid Transaction Type';
