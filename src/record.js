@@ -27,10 +27,10 @@ class Record{
         let obj = {};
         this.publicKeys.forEach((key)=>{
             obj[key] = this[key];
-            if(key === 'teh_date'){
+            if(key === 'teh_date' && isNaN(Date.parse(this[key]))){
                 obj[key] = Record._getTehDate();
             }
-            if(key === 'created_date'){
+            if(key === 'created_date' && isNaN(Date.parse(this[key]))){
                 obj[key] = this.db.date();
             }
         });
