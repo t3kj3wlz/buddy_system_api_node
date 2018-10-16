@@ -54,7 +54,7 @@ class BtcOrder extends Record{
                 order.btc_total_amount = order.btc_amount + order.shipping_amount_btc + order.btc_fees;
                 order.user = username;
                 order._create().then((orderObj)=>{
-                    Stash.Stash.increase('btc',-1 * Math.abs(order.btc_total_amount)).then((stashObj)=>{
+                    Stash.Stash.increase('btc',-1 * Math.abs(order.btc_total_amount),username).then((stashObj)=>{
                         resolve(orderObj);
                     },(err)=>{
                         reject(err);
