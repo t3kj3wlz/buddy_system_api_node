@@ -37,9 +37,9 @@ class Record{
             }else if(key === 'created_date'){
                 obj[key] = this.db.date(this[key]);
             }
-            if(key === 'completion_date' && isNaN(Date.parse(this[key]))){
+            if(key === 'completed_date' && isNaN(Date.parse(this[key]))){
                 obj[key] = this.db.date();
-            }else if(key === 'completion_date'){
+            }else if(key === 'completed_date'){
                 obj[key] = this.db.date(this[key]);
             }
         });
