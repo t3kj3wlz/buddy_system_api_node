@@ -29,9 +29,13 @@ class Record{
             obj[key] = this[key];
             if(key === 'teh_date' && isNaN(Date.parse(this[key]))){
                 obj[key] = Record._getTehDate();
+            }else if(key === 'teh_date'){
+                obj[key] = Record._getTehDate(this[key]);
             }
             if(key === 'created_date' && isNaN(Date.parse(this[key]))){
                 obj[key] = this.db.date();
+            }else if(key === 'created_date'){
+                obj[key] = this.db.date(this[key]);
             }
         });
         return obj;
@@ -78,8 +82,8 @@ class Record{
             });
         });
     }
-    static _getTehDate(){
-        var dateObj = new Date();
+    static _getTehDate(dateStr){
+        var dateObj = (dateStr === undefined) ? new Date() : new Date(dateStr);
         var month = dateObj.getUTCMonth() + 1; //months from 1-12
         var day = dateObj.getUTCDate();
         var year = dateObj.getUTCFullYear();
