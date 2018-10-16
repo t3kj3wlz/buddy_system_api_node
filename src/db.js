@@ -103,7 +103,7 @@ class Db{
         if(dateStr === undefined){
             return (new Date(Date.now() - tzoffset)).toISOString().substring(0, 19).replace('T', ' ');
         }
-        return (new Date(Date.now() - tzoffset)).toISOString().substring(0, 19).replace('T', ' ');
+        return (new Date(Date.parse(dateStr) - tzoffset)).toISOString().substring(0, 19).replace('T', ' ');
     }
 }
 module.exports = Db;
