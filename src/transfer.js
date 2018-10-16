@@ -60,7 +60,7 @@ class BtcXfer extends Record{
                 xfer.completion_rate = completionRate;
                 xfer.completion_date = xfer.db.date();
                 xfer._update().then((xferObj)=>{
-                    Stash.Stash.increase('btc',btcGained).then((stashObj)=>{
+                    Stash.Stash.increase('btc',btcGained,xfer.user).then((stashObj)=>{
                         resolve(xferObj._buildPublicObj());
                     },(err)=>{
                         reject(err);
