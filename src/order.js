@@ -66,9 +66,9 @@ class BtcOrder extends Record{
     }
     static complete(orderId){
         return new Promise((resolve,reject)=>{
-            var order = new Order(orderId);
+            var order = new BtcOrder(orderId);
             order._build().then((orderData)=>{
-                if(order.received_date !== null){
+                if(!isNaN(order.received_date)){
                     reject('Cannot Double Arrive Order.');
                 }
                 order.received_date = order.db.date();
